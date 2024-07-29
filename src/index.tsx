@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { Article } from './components/article/Article';
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
-import { OptionType, TSettingsArticle, defaultArticleState, firstSettings } from './constants/articleProps';
+import { OptionType, ArticleStateType, defaultArticleState } from './constants/articleProps';
 
 import './styles/index.scss';
 import styles from './styles/index.module.scss';
@@ -13,15 +13,15 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
-	const [settingArticle, setSettingArticle] = useState<TSettingsArticle>(firstSettings)
-	const updateSettings = (settings: TSettingsArticle) => {
+	const [settingArticle, setSettingArticle] = useState<ArticleStateType>(defaultArticleState)
+	const updateSettings = (settings: ArticleStateType) => {
 		setSettingArticle({
 			...settingArticle, 
-			font: settings.font,
-			fontSize: settings.fontSize,
+			fontFamilyOption: settings.fontFamilyOption,
+			fontSizeOption: settings.fontSizeOption,
 			fontColor: settings.fontColor,
 			backgroundColor: settings.backgroundColor,
-			width: settings.width,
+			contentWidth: settings.contentWidth,
 		})
 	}
 
@@ -30,10 +30,10 @@ const App = () => {
 			className={clsx(styles.main)}
 			style={
 				{
-					'--font-family': settingArticle.font.value,
-					'--font-size': settingArticle.fontSize.value,
+					'--font-family': settingArticle.fontFamilyOption.value,
+					'--font-size': settingArticle.fontSizeOption.value,
 					'--font-color': settingArticle.fontColor.value,
-					'--container-width': settingArticle.width.value,
+					'--container-width': settingArticle.contentWidth.value,
 					'--bg-color': settingArticle.backgroundColor.value,
 				} as CSSProperties
 			}>

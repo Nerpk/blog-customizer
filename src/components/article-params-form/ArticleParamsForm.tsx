@@ -2,7 +2,7 @@ import styles from './ArticleParamsForm.module.scss';
 import React, { useEffect, useRef, useState } from 'react';
 
 //константы
-import { OptionType, TSettingsArticle, firstSettings, backgroundColors, contentWidthArr, fontColors, fontFamilyOptions, fontSizeOptions } from 'src/constants/articleProps';
+import { OptionType, defaultArticleState, backgroundColors, contentWidthArr, fontColors, fontFamilyOptions, fontSizeOptions, ArticleStateType } from 'src/constants/articleProps';
 
 //элементы из проекта
 import { ArrowButton } from 'components/arrow-button';
@@ -12,7 +12,7 @@ import { RadioGroup } from '../radio-group';
 import { Separator } from '../separator';
 import { Text } from '../text'
 
-export const ArticleParamsForm = (props: {onClick: (settings: TSettingsArticle)=>void}) => {
+export const ArticleParamsForm = (props: {onClick: (settings: ArticleStateType)=>void}) => {
 	//открытие закрытие формы
 	const [isOpen, setIsOpen] = useState(false);
 	const refForm = useRef<HTMLFormElement | null>(null);
@@ -33,28 +33,28 @@ export const ArticleParamsForm = (props: {onClick: (settings: TSettingsArticle)=
 	}, [isOpen]);
 
 	//обновление страницы
-	const settings = (): TSettingsArticle => {
+	const settings = (): ArticleStateType => {
 		return {
-			font: selectedFontOption,
-			fontSize: selectedSizeFontOption,
+			fontFamilyOption: selectedFontOption,
+			fontSizeOption: selectedSizeFontOption,
 			fontColor: selectedColorFontOption,
 			backgroundColor: selectedColorBGOption,
-			width: selectedContentWidthOption,
+			contentWidth: selectedContentWidthOption,
 		}
 	}
-	const resetSettings = (): TSettingsArticle => {
+	const resetSettings = (): ArticleStateType => {
 		event?.preventDefault()
 
-		handleFontOptionChange(firstSettings.font);
-		handleSizeFontOptionChange(firstSettings.fontSize);
-		handleSizeColorOptionChange(firstSettings.fontColor);
-		handleColorBGOptionChange(firstSettings.backgroundColor);
-		handleContentWidthOptionChange(firstSettings.width);
+		handleFontOptionChange(defaultArticleState.fontFamilyOption);
+		handleSizeFontOptionChange(defaultArticleState.fontSizeOption);
+		handleSizeColorOptionChange(defaultArticleState.fontColor);
+		handleColorBGOptionChange(defaultArticleState.backgroundColor);
+		handleContentWidthOptionChange(defaultArticleState.contentWidth);
 
 		//toggleForm();           //опционально: если нужно закрывать форму после изменений, убрать коментирование
 
-		props.onClick(firstSettings)
-		return firstSettings;
+		props.onClick(defaultArticleState)
+		return defaultArticleState;
 	}
 	const applySettings = () => {
 		event?.preventDefault()
@@ -64,27 +64,27 @@ export const ArticleParamsForm = (props: {onClick: (settings: TSettingsArticle)=
 	}
 	
 	//внутренность формы
-	const [selectedFontOption, setSelectedFontOption] = useState<OptionType>(firstSettings.font);
+	const [selectedFontOption, setSelectedFontOption] = useState<OptionType>(defaultArticleState.fontFamilyOption);
 	const handleFontOptionChange = (option: OptionType) => {
 		setSelectedFontOption(option);
 	};
 
-	const [selectedSizeFontOption, setSelectedSizeFontOption] = useState<OptionType>(firstSettings.fontSize)
+	const [selectedSizeFontOption, setSelectedSizeFontOption] = useState<OptionType>(defaultArticleState.fontSizeOption)
 	const handleSizeFontOptionChange = (option: OptionType) => {
 		setSelectedSizeFontOption(option);
 	};
 
-	const [selectedColorFontOption, setSelectedColorFontOption] = useState<OptionType>(firstSettings.fontColor);
+	const [selectedColorFontOption, setSelectedColorFontOption] = useState<OptionType>(defaultArticleState.fontColor);
 	const handleSizeColorOptionChange = (option: OptionType) => {
 		setSelectedColorFontOption(option);
 	};
 
-	const [selectedColorBGOption, setSelectedColorBGOption] = useState<OptionType>(firstSettings.backgroundColor);
+	const [selectedColorBGOption, setSelectedColorBGOption] = useState<OptionType>(defaultArticleState.backgroundColor);
 	const handleColorBGOptionChange = (option: OptionType) => {
 		setSelectedColorBGOption(option);
 	};
 
-	const [selectedContentWidthOption, setSelectedContentWidthOption] = useState<OptionType>(firstSettings.width);
+	const [selectedContentWidthOption, setSelectedContentWidthOption] = useState<OptionType>(defaultArticleState.contentWidth);
 	const handleContentWidthOptionChange = (option: OptionType) => {
 		setSelectedContentWidthOption(option);
 	};

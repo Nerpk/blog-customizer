@@ -177,19 +177,3 @@ export const defaultArticleState = {
 };
 
 export type ArticleStateType = typeof defaultArticleState;
-
-export type TSettingsArticle = {
-	font: OptionType;
-	fontSize: OptionType;
-	fontColor: OptionType;
-	backgroundColor: OptionType;
-	width: OptionType;
-}
-
-export const firstSettings: TSettingsArticle = {
-	font: fontFamilyOptions[0],
-	fontSize: fontSizeOptions[0],
-	fontColor: fontColors[0],
-	backgroundColor: backgroundColors[0],
-	width: contentWidthArr[0],
-}
