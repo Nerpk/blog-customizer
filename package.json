@@ -34,6 +34,7 @@
 		"eslint-plugin-prettier": "^4.2.1",
 		"eslint-plugin-react": "^7.32.2",
 		"eslint-plugin-react-hooks": "^4.6.0",
+		"gh-pages": "^6.1.1",
 		"html-webpack-plugin": "^5.5.1",
 		"husky": "^8.0.3",
 		"lint-staged": "^13.2.2",
@@ -59,6 +60,8 @@
 		"webpack-dev-server": "^4.15.0"
 	},
 	"scripts": {
+		"predeploy": "npm run build",
+   		"deploy": "gh-pages -d dist",
 		"build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.js --env env=prod",
 		"start": "webpack serve --config webpack/webpack.config.js --env env=dev",
 		"stylelint": "stylelint \"src/**/*.scss\"",
